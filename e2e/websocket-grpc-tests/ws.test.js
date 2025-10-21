@@ -39,7 +39,6 @@ function callAssign(ticketId){
         sock.close();
         process.exit(0);
       });
-      // call grpc -> should trigger update
       await callAssign(ticket.id || ticket.ticketNumber || ticket);
     });
     sock.on('connect_error', (e)=> { console.error('connect_error', e); process.exit(2); });
