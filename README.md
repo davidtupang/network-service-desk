@@ -56,7 +56,7 @@ network-service-desk/
 │   ├── e2e/                      # End-to-end tests
 │   └── tests/                    # Unit tests
 │
-├── frontend/                     # React + Vite dashboard
+├── frontend/client-app/          # React + Vite dashboard
 │
 ├── .github/
 │   └── workflows/                # CI/CD GitHub Actions
@@ -123,7 +123,7 @@ npm run start:dev
  **Run Frontend**
 
 ```bash
-cd frontend
+cd frontend/client-app
 npm install
 npm run dev
 ```
