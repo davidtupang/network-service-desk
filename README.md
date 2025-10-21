@@ -45,63 +45,6 @@ Network Service Desk simulates an enterprise IT support system:
 
 ---
 
-##  Project Structure
-
-```
-network-service-desk/
-│
-├── backend/
-│   ├── api-gateway/              # REST + gRPC proxy + Auth
-│   ├── business-service/         # Ticket logic + WebSocket + gRPC server
-│   ├── e2e/                      # End-to-end tests
-│   └── tests/                    # Unit tests
-│
-├── frontend/client-app/          # React + Vite dashboard
-│
-├── .github/
-│   └── workflows/                # CI/CD GitHub Actions
-│
-├── .env.example
-├── docker-compose.yml
-└── README.md
-```
-
----
-
-##  Environment Variables
-
-Create a `.env` file in the root directory:
-
-```bash
-cp .env.example .env
-```
-
-Fill in the following values (for **local development without Docker**):
-
-```env
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/network_support
-GATEWAY_PORT=3000
-BUSINESS_PORT=3001
-FRONTEND_PORT=3002
-JWT_SECRET=this_is_a_super_secure_and_random_secret_key_!@#2025
-GRPC_PORT=50051
-```
-
----
-
-##  Database Setup (Manual)
-
-1. Run local PostgreSQL:
-
-```bash
-psql -U postgres
-CREATE DATABASE network_support;
-```
-
->  Auto table creation: **business-service** uses `synchronize: true` in TypeORM, so the `users` and `tickets` tables are automatically created when the service runs.
-
----
-
 ##  Running Without Docker
 
  **Run Business Service**
@@ -141,22 +84,6 @@ npm run dev
 
 ---
 
-##  gRPC Communication
-
-Definition file: `backend/business-service/proto/ticket.proto`
-
-Example call from API Gateway to Business Service:
-
-```ts
-// api-gateway/src/grpc/ticket.client.ts
-this.ticketClient.assignTechnician({
-  ticketId: '123',
-  technicianId: 'tech-456',
-});
-```
-
----
-
 ##  Testing
 
 * **Unit Tests**
@@ -175,15 +102,3 @@ npm run grpc
 npm run ws
 npm run all
 ```
-
----
-
-##  CI/CD (Optional)
-
-GitHub Actions automatically runs:
-
-* Build & Lint
-* Run Unit + E2E tests
-* Publish Docker images
-
-File: `.github/workflows/e2e.yml`
