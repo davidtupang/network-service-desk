@@ -1,0 +1,24 @@
+{
+  "name": "business-service",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node dist/main.js",
+    "build": "nest build",
+    "prisma:generate": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.8.0",
+    "@nestjs/platform-express": "^10.2.0",
+    "@nestjs/core": "^10.2.0",
+    "@nestjs/common": "^10.2.0",
+    "@nestjs/websockets": "^10.2.0",
+    "socket.io": "^4.7.2",
+    "@grpc/grpc-js": "^1.8.17",
+    "@grpc/proto-loader": "^0.7.7"
+  },
+  "devDependencies": {
+    "prisma": "^5.8.0",
+    "typescript": "^5.2.2"
+  }
+}

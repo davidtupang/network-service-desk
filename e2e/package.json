@@ -1,0 +1,16 @@
+{
+  "name": "network-service-desk-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "grpc": "node websocket-grpc-tests/grpc.test.js",
+    "ws": "node websocket-grpc-tests/ws.test.js",
+    "all": "node websocket-grpc-tests/grpc.test.js && node websocket-grpc-tests/ws.test.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.8.17",
+    "@grpc/proto-loader": "^0.7.7",
+    "node-fetch": "^3.4.0",
+    "socket.io-client": "^4.7.2"
+  }
+}

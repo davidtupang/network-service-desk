@@ -1,0 +1,28 @@
+name: e2e tests
+
+on:
+  push:
+    branches: [ develop, release/phase-1 ]
+  pull_request:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:20-dind
+        options: --privileged
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start services
+        run: docker compose -f docker/docker-compose.yml up -d --build
+      - name: Wait for services
+        run: sleep 10
+      - name: Run e2e tests
+        run: |
+          cd e2e
+          npm ci
+          npm run all
+      - name: Tear down
+        if: always()
+        run: docker compose -f docker/docker-compose.yml down --volumes

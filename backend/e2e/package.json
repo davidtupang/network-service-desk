@@ -1,0 +1,16 @@
+{
+  "name": "e2e-tests",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "grpc": "node grpc.test.js",
+    "ws": "node ws.test.js",
+    "all": "node grpc.test.js && node ws.test.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.8.17",
+    "@grpc/proto-loader": "^0.7.7",
+    "node-fetch": "^3.4.0",
+    "socket.io-client": "^4.7.2"
+  }
+}

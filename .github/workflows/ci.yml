@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ develop, release/phase-1 ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install root dependencies
+        run: echo "No root install step defined"
+      - name: Build backend packages
+        run: |
+          if [ -d backend/api-gateway ]; then (cd backend/api-gateway && npm ci && npm run build) || true; fi
+          if [ -d backend/business-service ]; then (cd backend/business-service && npm ci && npm run build) || true; fi

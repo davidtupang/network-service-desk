@@ -1,0 +1,61 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: network_support
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  api-gateway:
+    build: ./api-gateway
+    env_file: .env.example
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - BUSINESS_URL=http://business-service:${BUSINESS_PORT}
+      - GRPC_ADDRESS=business-service:${'${GRPC_PORT}'}
+    ports:
+      - "${GATEWAY_PORT}:3000"
+    depends_on:
+      - business-service
+    volumes:
+      - ./api-gateway:/app
+      - /app/node_modules
+
+  business-service:
+    build: ./business-service
+    env_file: .env.example
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - PORT=${BUSINESS_PORT}
+      - GRPC_PORT=${GRPC_PORT}
+    ports:
+      - "${BUSINESS_PORT}:3001"
+      - "${GRPC_PORT}:50051"
+    volumes:
+      - ./business-service:/app
+      - /app/node_modules
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    env_file: .env.example
+    environment:
+      - VITE_API_GATEWAY=http://localhost:${GATEWAY_PORT}
+      - VITE_WS_URL=http://localhost:${BUSINESS_PORT}
+    ports:
+      - "${FRONTEND_PORT}:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - api-gateway
+
+volumes:
+  db-data:

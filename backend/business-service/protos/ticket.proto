@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package ticket;
+
+service TicketService {
+  rpc AssignTechnician(AssignRequest) returns (AssignResponse);
+  rpc ResolveTicket(ResolveRequest) returns (ResolveResponse);
+  rpc StreamTicketUpdates(StreamRequest) returns (stream TicketUpdate);
+}
+
+message AssignRequest {
+  string ticketId = 1;
+  string technicianId = 2;
+}
+
+message AssignResponse {
+  string status = 1;
+}
+
+message ResolveRequest {
+  string ticketId = 1;
+  string note = 2;
+}
+
+message ResolveResponse {
+  string status = 1;
+}
+
+message StreamRequest {
+  string since = 1;
+}
+
+message TicketUpdate {
+  string ticketId = 1;
+  string status = 2;
+  string ticketNumber = 3;
+  string companyName = 4;
+}
