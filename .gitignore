@@ -57,11 +57,7 @@ docker/*.log
 *.sublime-workspace
 *.sublime-project
 
-# Mac specific
-.AppleDouble
-.LSOverride
-
-# Windows specific
+# Windows
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
