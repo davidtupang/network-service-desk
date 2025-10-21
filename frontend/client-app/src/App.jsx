@@ -15,7 +15,6 @@ export default function App(){
     socket.on('connect', ()=> setLog(l=>[...l, 'ws connected']))
     socket.on('ticket:update', payload=>{
       setLog(l=>[...l, 'ticket:update '+JSON.stringify(payload)])
-      // naive update: refetch list
       fetch(`${GATEWAY}/api/tickets`, { headers: { 'content-type':'application/json', 'x-user-id':'frontend-user' } })
         .then(r=>r.json()).then(setTickets).catch(e=>setLog(l=>[...l, 'fetch error:'+e.message]))
     })
