@@ -98,7 +98,7 @@ psql -U postgres
 CREATE DATABASE network_support;
 ```
 
-> ✅ Auto table creation: **business-service** uses `synchronize: true` in TypeORM, so the `users` and `tickets` tables are automatically created when the service runs.
+>  Auto table creation: **business-service** uses `synchronize: true` in TypeORM, so the `users` and `tickets` tables are automatically created when the service runs.
 
 ---
 
@@ -153,31 +153,6 @@ this.ticketClient.assignTechnician({
   ticketId: '123',
   technicianId: 'tech-456',
 });
-```
-
----
-
-##  WebSocket Connection
-
-**Business Service** emits events:
-
-```ts
-@WebSocketGateway()
-export class TicketGateway {
-  @WebSocketServer() server: Server;
-
-  emitTicketUpdate(ticket: Ticket) {
-    this.server.emit('ticket:update', ticket);
-  }
-}
-```
-
-**Frontend** listens:
-
-```ts
-import { io } from "socket.io-client";
-const socket = io("http://localhost:3001");
-socket.on("ticket:update", (data) => console.log("Ticket Updated:", data));
 ```
 
 ---
