@@ -41,7 +41,7 @@ Network Service Desk simulates an enterprise IT support system:
 | Authentication              | JWT                                     |
 | Testing                     | Jest + Supertest + WebSocket + gRPC e2e |
 | CI/CD                       | GitHub Actions                          |
-| Containerization            | Docker & Docker Compose (optional)      |
+| Containerization            | Docker & Docker Compose       |
 
 ---
 
