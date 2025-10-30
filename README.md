@@ -24,7 +24,7 @@ Network Service Desk simulates an enterprise IT support system:
 | **Business Service (NestJS)** | Core ticket logic (CRUD, assignment, WebSocket events, gRPC server)                 |
 | **Frontend (React + Vite)**   | Web dashboard for clients and technicians to manage tickets                         |
 | **Database (PostgreSQL)**     | Persistent storage for users & tickets                                              |
-| **Redis (optional)**          | For message/event broadcasting at scale                                             |
+| **Redis**          | For message/event broadcasting at scale                                             |
 
 ---
 
@@ -41,7 +41,7 @@ Network Service Desk simulates an enterprise IT support system:
 | Authentication              | JWT                                     |
 | Testing                     | Jest + Supertest + WebSocket + gRPC e2e |
 | CI/CD                       | GitHub Actions                          |
-| Containerization            | Docker & Docker Compose (optional)      |
+| Containerization            | Docker & Docker Compose       |
 
 ---
 
